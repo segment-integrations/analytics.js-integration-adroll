@@ -10,8 +10,7 @@
     "ianstormtaylor/to-snake-case": "0.1.2",
     "segmentio/use-https": "0.1.0",
     "component/each": "0.0.1",
-    "ianstormtaylor/is": "0.1.0",
-    "segmentio/obj-case": "0.2.1"
+    "ndhoule/foldl": "1.0.3"
   },
   "development": {
     "segmentio/analytics.js-core": "^2.10.0",
