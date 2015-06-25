@@ -2,11 +2,11 @@
   "name": "analytics.js-integration-adroll",
   "repo": "segment-integrations/analytics.js-integration-adroll",
   "description": "The Adroll analytics.js integration.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "segmentio/analytics.js-integration": "0.3.x",
+    "segmentio/analytics.js-integration": "^1.0.0",
     "ianstormtaylor/to-snake-case": "0.1.2",
     "segmentio/use-https": "0.1.0",
     "component/each": "0.0.1",
