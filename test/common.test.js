@@ -1,11 +1,11 @@
-// 'use strict';
+'use strict';
 
-var AdRoll = require('../lib/');
 var Analytics = require('analytics.js-core').constructor;
 var each = require('each');
 var integration = require('analytics.js-integration');
 var sandbox = require('clear-env');
 var tester = require('analytics.js-integration-tester');
+var AdRoll = require('../lib/');
 
 each([1, 2], function(version) {
   describe('Adroll - Common (' + version + ')', function() {

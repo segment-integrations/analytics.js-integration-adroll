@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 var Analytics = require('analytics.js-core').constructor;
 var tester = require('analytics.js-integration-tester');
