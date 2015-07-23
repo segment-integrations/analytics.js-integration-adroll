@@ -1,4 +1,9 @@
 
+1.0.5 / 2015-07-23
+==================
+
+  * Add compatibility for new-style segments. This feature is implemented as a versioned change, so old clients will still be subject to the old way of sending data
+
 1.0.4 / 2015-06-30
 ==================
 
