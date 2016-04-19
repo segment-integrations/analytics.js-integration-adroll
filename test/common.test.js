@@ -112,9 +112,14 @@ each([1, 2], function(version) {
       });
 
       describe('#identify', function() {
+        beforeEach(function() {
+          analytics.stub(window.__adroll, 'record_adroll_email');
+        });
+
         it('should pass email', function() {
           analytics.identify('id', { email: 'test@email.com' });
           analytics.equal('test@email.com', window.adroll_email);
+          analytics.calledOnce(window.__adroll.record_adroll_email);
         });
 
         it('should not pass empty email', function() {
