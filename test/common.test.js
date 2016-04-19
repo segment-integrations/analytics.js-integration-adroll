@@ -154,7 +154,8 @@ each([1, 2], function(version) {
           analytics.track('Order Created', { total: 1.99 });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
-            adroll_conversion_value_in_dollars: 1.99
+            adroll_conversion_value: 1.99,
+            adroll_currency: 'USD'
           });
         });
 
@@ -162,7 +163,8 @@ each([1, 2], function(version) {
           analytics.track('Order Created', { revenue: 2.99 });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
-            adroll_conversion_value_in_dollars: 2.99
+            adroll_conversion_value: 2.99,
+            adroll_currency: 'USD'
           });
         });
 
@@ -170,7 +172,8 @@ each([1, 2], function(version) {
           analytics.track('Order Created', { revenue: 2.99, id: '12345', sku: '43434-21', other: '1234' });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
-            adroll_conversion_value_in_dollars: 2.99,
+            adroll_conversion_value: 2.99,
+            adroll_currency: 'USD',
             product_id: '12345',
             sku: '43434-21',
             other: '1234',
