@@ -1,4 +1,9 @@
 
+1.0.6 / 2016-04-19
+==================
+
+  * Fixing race condition with sending email address to AdRoll.
+
 1.0.5 / 2015-07-23
 ==================
 
