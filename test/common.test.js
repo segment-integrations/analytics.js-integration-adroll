@@ -18,7 +18,8 @@ each([1, 2], function(version) {
       events: {
         'Viewed Home Page': 'viewed_home_page',
         'Viewed Home Index Page': 'viewed_home_index_page',
-        'Completed Order': 'order_created'
+        'Completed Order': 'order_created',
+        Teems: 'Ate habanero cheese'
       }
     };
 
@@ -147,6 +148,21 @@ each([1, 2], function(version) {
           analytics.calledOnce(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             order_id: 1
+          });
+        });
+
+        it('should map revenue for normal track events', function() {
+          analytics.track('Teems', { revenue: 17.38 });
+          analytics.calledOnce(window.__adroll.record_user, {
+            adroll_segments: 'Ate habanero cheese',
+            adroll_conversion_value: 17.38
+          });
+        });
+
+        it('should not map revenue if no revenue is found', function() {
+          analytics.track('Teems');
+          analytics.calledOnce(window.__adroll.record_user, {
+            adroll_segments: 'Ate habanero cheese'
           });
         });
 
