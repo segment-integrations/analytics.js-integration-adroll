@@ -19,7 +19,9 @@ each([1, 2], function(version) {
         'Viewed Home Page': 'viewed_home_page',
         'Viewed Home Index Page': 'viewed_home_index_page',
         'Completed Order': 'order_created',
-        Teems: 'Ate habanero cheese'
+        'Viewed Product': 'viewed_product',
+        'Added Product': 'added_product',
+        Teems: 'ate_habanero_cheese'
       }
     };
 
@@ -120,7 +122,7 @@ each([1, 2], function(version) {
         it('should pass email', function() {
           analytics.identify('id', { email: 'test@email.com' });
           analytics.equal('test@email.com', window.adroll_email);
-          analytics.calledOnce(window.__adroll.record_adroll_email);
+          analytics.called(window.__adroll.record_adroll_email);
         });
 
         it('should not pass empty email', function() {
@@ -137,15 +139,15 @@ each([1, 2], function(version) {
         it('should include userId', function() {
           analytics.user().identify('id');
           analytics.track('Completed Order', {});
-          analytics.calledOnce(window.__adroll.record_user, {
+          analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             user_id: 'id'
           });
         });
 
         it('should include orderId', function() {
-          analytics.track('Completed Order', { id: 1 });
-          analytics.calledOnce(window.__adroll.record_user, {
+          analytics.track('Completed Order', { orderId: 1 });
+          analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             order_id: 1
           });
@@ -153,22 +155,22 @@ each([1, 2], function(version) {
 
         it('should map revenue for normal track events', function() {
           analytics.track('Teems', { revenue: 17.38 });
-          analytics.calledOnce(window.__adroll.record_user, {
-            adroll_segments: 'Ate habanero cheese',
+          analytics.called(window.__adroll.record_user, {
+            adroll_segments: 'ate_habanero_cheese',
             adroll_conversion_value: 17.38
           });
         });
 
         it('should not map revenue if no revenue is found', function() {
           analytics.track('Teems');
-          analytics.calledOnce(window.__adroll.record_user, {
-            adroll_segments: 'Ate habanero cheese'
+          analytics.called(window.__adroll.record_user, {
+            adroll_segments: 'ate_habanero_cheese'
           });
         });
 
         it('should map revenue to conversion_value', function() {
           analytics.track('Completed Order', { revenue: 1.99 });
-          analytics.calledOnce(window.__adroll.record_user, {
+          analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             adroll_conversion_value: 1.99
           });
@@ -176,15 +178,16 @@ each([1, 2], function(version) {
 
         it('should should send total if no revenue for conversion_value', function() {
           analytics.track('Completed Order', { total: 29.88 });
-          analytics.calledOnce(window.__adroll.record_user, {
+          analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
-            adroll_conversion_value: 29.88
+            adroll_conversion_value: 29.88,
+            total: 29.88
           });
         });
 
         it('should map revenue as conversion_value and total as custom prop', function() {
           analytics.track('Completed Order', { revenue: 2.99, total: 17.38 });
-          analytics.calledOnce(window.__adroll.record_user, {
+          analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             adroll_conversion_value: 2.99,
             total: 17.38
@@ -192,14 +195,31 @@ each([1, 2], function(version) {
         });
 
         it('should include properties', function() {
-          analytics.track('Completed Order', { revenue: 2.99, id: '12345', sku: '43434-21', other: '1234' });
-          analytics.calledOnce(window.__adroll.record_user, {
+          analytics.track('Completed Order', { revenue: 2.99, orderId: '12345', sku: '43434-21', other: '1234' });
+          analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             adroll_conversion_value: 2.99,
-            product_id: '12345',
             sku: '43434-21',
             other: '1234',
             order_id: '12345'
+          });
+        });
+
+        it('should map price and product id for viewed product', function() {
+          analytics.track('Viewed Product', { price: 17.38, id: 'beans' });
+          analytics.called(window.__adroll.record_user, {
+            adroll_segments: 'viewed_product',
+            adroll_conversion_value: 17.38,
+            product_id: 'beans'
+          });
+        });
+
+        it('should map price and product id for added product', function() {
+          analytics.track('Added Product', { price: 17.38, id: 'beans' });
+          analytics.called(window.__adroll.record_user, {
+            adroll_segments: 'added_product',
+            adroll_conversion_value: 17.38,
+            product_id: 'beans'
           });
         });
       });
