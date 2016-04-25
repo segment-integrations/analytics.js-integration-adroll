@@ -18,7 +18,7 @@ each([1, 2], function(version) {
       events: {
         'Viewed Home Page': 'viewed_home_page',
         'Viewed Home Index Page': 'viewed_home_index_page',
-        'Order Created': 'order_created'
+        'Completed Order': 'order_created'
       }
     };
 
@@ -135,42 +135,51 @@ each([1, 2], function(version) {
 
         it('should include userId', function() {
           analytics.user().identify('id');
-          analytics.track('Order Created', {});
-          analytics.called(window.__adroll.record_user, {
+          analytics.track('Completed Order', {});
+          analytics.calledOnce(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             user_id: 'id'
           });
         });
 
         it('should include orderId', function() {
-          analytics.track('Order Created', { orderId: 1 });
-          analytics.called(window.__adroll.record_user, {
+          analytics.track('Completed Order', { id: 1 });
+          analytics.calledOnce(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             order_id: 1
           });
         });
 
         it('should map revenue to conversion_value', function() {
-          analytics.track('Order Created', { total: 1.99 });
-          analytics.called(window.__adroll.record_user, {
+          analytics.track('Completed Order', { revenue: 1.99 });
+          analytics.calledOnce(window.__adroll.record_user, {
             adroll_segments: 'order_created',
-            adroll_conversion_value_in_dollars: 1.99
+            adroll_conversion_value: 1.99
           });
         });
 
-        it('should map revenue as conversion_value', function() {
-          analytics.track('Order Created', { revenue: 2.99 });
-          analytics.called(window.__adroll.record_user, {
+        it('should should send total if no revenue for conversion_value', function() {
+          analytics.track('Completed Order', { total: 29.88 });
+          analytics.calledOnce(window.__adroll.record_user, {
             adroll_segments: 'order_created',
-            adroll_conversion_value_in_dollars: 2.99
+            adroll_conversion_value: 29.88
+          });
+        });
+
+        it('should map revenue as conversion_value and total as custom prop', function() {
+          analytics.track('Completed Order', { revenue: 2.99, total: 17.38 });
+          analytics.calledOnce(window.__adroll.record_user, {
+            adroll_segments: 'order_created',
+            adroll_conversion_value: 2.99,
+            total: 17.38
           });
         });
 
         it('should include properties', function() {
-          analytics.track('Order Created', { revenue: 2.99, id: '12345', sku: '43434-21', other: '1234' });
-          analytics.called(window.__adroll.record_user, {
+          analytics.track('Completed Order', { revenue: 2.99, id: '12345', sku: '43434-21', other: '1234' });
+          analytics.calledOnce(window.__adroll.record_user, {
             adroll_segments: 'order_created',
-            adroll_conversion_value_in_dollars: 2.99,
+            adroll_conversion_value: 2.99,
             product_id: '12345',
             sku: '43434-21',
             other: '1234',
