@@ -63,6 +63,7 @@ describe('AdRoll - v2', function() {
           title: window.document.title,
           url: window.location.href
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
 
       it('should send a mapped named and categorized page', function() {
@@ -83,6 +84,7 @@ describe('AdRoll - v2', function() {
           title: window.document.title,
           url: window.location.href
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
 
       it('should not send an unmapped page', function() {
@@ -107,6 +109,7 @@ describe('AdRoll - v2', function() {
           adroll_segments: 'f21vVsxY',
           adroll_conversion_value: 17.38
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
 
       it('should map currency', function() {
@@ -116,6 +119,7 @@ describe('AdRoll - v2', function() {
           adroll_conversion_value: 17.38,
           adroll_currency: 'CAD'
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
 
       it('should not send an unmapped event', function() {

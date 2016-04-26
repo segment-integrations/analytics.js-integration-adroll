@@ -62,6 +62,7 @@ describe('AdRoll - v1', function() {
           title: window.document.title,
           url: window.location.href
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
 
       it('should track a named and categorized page page', function() {
@@ -82,6 +83,7 @@ describe('AdRoll - v1', function() {
           title: window.document.title,
           url: window.location.href
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
 
       it('should track an unnamed page', function() {
@@ -100,6 +102,7 @@ describe('AdRoll - v1', function() {
           title: window.document.title,
           url: window.location.href
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
     });
 
@@ -113,6 +116,7 @@ describe('AdRoll - v1', function() {
         analytics.called(window.__adroll.record_user, {
           adroll_segments: 'conversion'
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
 
       it('should convert mapped segment names to snake case', function() {
@@ -121,6 +125,7 @@ describe('AdRoll - v1', function() {
         analytics.called(window.__adroll.record_user, {
           adroll_segments: 'ord_cancel'
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
 
       it('should send an event when no mapping is found, using the snakized event name as the segment', function() {
@@ -129,6 +134,7 @@ describe('AdRoll - v1', function() {
         analytics.called(window.__adroll.record_user, {
           adroll_segments: 'promotion_clicked'
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
 
       it('should not send a fallback event when a mapping is found', function() {
@@ -140,6 +146,7 @@ describe('AdRoll - v1', function() {
         analytics.didNotCall(window.__adroll.record_user, {
           adroll_segments: 'order_canceled'
         });
+        analytics.calledOnce(window.__adroll.record_user);
       });
     });
   });
