@@ -1,4 +1,9 @@
 
+1.0.7 / 2016-04-26
+==================
+
+  * refactor, clean up dupe properties, update semantic props
+
 1.0.6 / 2016-04-19
 ==================
 
