@@ -18,9 +18,9 @@ each([1, 2], function(version) {
       events: {
         'Viewed Home Page': 'viewed_home_page',
         'Viewed Home Index Page': 'viewed_home_index_page',
-        'Completed Order': 'order_created',
-        'Viewed Product': 'viewed_product',
-        'Added Product': 'added_product',
+        'Order Completed': 'order_created',
+        'Product Viewed': 'viewed_product',
+        'Product Added': 'added_product',
         Teems: 'ate_habanero_cheese'
       }
     };
@@ -139,7 +139,7 @@ each([1, 2], function(version) {
 
         it('should include userId', function() {
           analytics.user().identify('id');
-          analytics.track('Completed Order', {});
+          analytics.track('Order Completed', {});
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             user_id: 'id'
@@ -148,7 +148,7 @@ each([1, 2], function(version) {
         });
 
         it('should include orderId', function() {
-          analytics.track('Completed Order', { orderId: 1 });
+          analytics.track('Order Completed', { orderId: 1 });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             order_id: 1
@@ -174,7 +174,7 @@ each([1, 2], function(version) {
         });
 
         it('should map revenue to conversion_value', function() {
-          analytics.track('Completed Order', { revenue: 1.99 });
+          analytics.track('Order Completed', { revenue: 1.99 });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             adroll_conversion_value: 1.99
@@ -183,7 +183,7 @@ each([1, 2], function(version) {
         });
 
         it('should should send total if no revenue for conversion_value', function() {
-          analytics.track('Completed Order', { total: 29.88 });
+          analytics.track('Order Completed', { total: 29.88 });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             adroll_conversion_value: 29.88,
@@ -193,7 +193,7 @@ each([1, 2], function(version) {
         });
 
         it('should map revenue as conversion_value and total as custom prop', function() {
-          analytics.track('Completed Order', { revenue: 2.99, total: 17.38 });
+          analytics.track('Order Completed', { revenue: 2.99, total: 17.38 });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             adroll_conversion_value: 2.99,
@@ -203,7 +203,7 @@ each([1, 2], function(version) {
         });
 
         it('should include properties', function() {
-          analytics.track('Completed Order', { revenue: 2.99, orderId: '12345', sku: '43434-21', other: '1234' });
+          analytics.track('Order Completed', { revenue: 2.99, orderId: '12345', sku: '43434-21', other: '1234' });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'order_created',
             adroll_conversion_value: 2.99,
@@ -214,8 +214,8 @@ each([1, 2], function(version) {
           analytics.calledOnce(window.__adroll.record_user);
         });
 
-        it('should map price and product id for viewed product', function() {
-          analytics.track('Viewed Product', { price: 17.38, id: 'beans' });
+        it('should map price and product id for Product Viewed', function() {
+          analytics.track('Product Viewed', { price: 17.38, id: 'beans' });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'viewed_product',
             adroll_conversion_value: 17.38,
@@ -224,8 +224,8 @@ each([1, 2], function(version) {
           analytics.calledOnce(window.__adroll.record_user);
         });
 
-        it('should map price and product id for added product', function() {
-          analytics.track('Added Product', { price: 17.38, id: 'beans' });
+        it('should map price and product id for Product Added', function() {
+          analytics.track('Product Added', { price: 17.38, id: 'beans' });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'added_product',
             adroll_conversion_value: 17.38,
