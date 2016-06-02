@@ -1,8 +1,8 @@
 'use strict';
 
-var Analytics = require('analytics.js-core').constructor;
-var tester = require('analytics.js-integration-tester');
-var sandbox = require('clear-env');
+var Analytics = require('@segment/analytics.js-core').constructor;
+var tester = require('@segment/analytics.js-integration-tester');
+var sandbox = require('@segment/clear-env');
 var AdRoll = require('../lib/');
 
 describe('AdRoll - v1', function() {

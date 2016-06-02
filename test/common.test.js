@@ -1,13 +1,13 @@
 'use strict';
 
-var Analytics = require('analytics.js-core').constructor;
-var each = require('each');
-var integration = require('analytics.js-integration');
-var sandbox = require('clear-env');
-var tester = require('analytics.js-integration-tester');
-var AdRoll = require('../lib/');
+var Analytics = require('@segment/analytics.js-core').constructor;
+var each = require('@ndhoule/each');
+var integration = require('@segment/analytics.js-integration');
+var sandbox = require('@segment/clear-env');
+var tester = require('@segment/analytics.js-integration-tester');
+var AdRoll = require('../lib');
 
-each([1, 2], function(version) {
+each(function(version) {
   describe('Adroll - Common (' + version + ')', function() {
     var adroll;
     var analytics;
@@ -236,4 +236,4 @@ each([1, 2], function(version) {
       });
     });
   });
-});
+}, [1, 2]);
