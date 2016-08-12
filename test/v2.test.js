@@ -15,7 +15,7 @@ describe('AdRoll - v2', function() {
     events: {
       'Viewed Home Page': 'zi2b9e01',
       'Viewed Home Index Page': 'Jxp3fGpw',
-      'Completed Order': 'f21vVsxY'
+      'Order Completed': 'f21vVsxY'
     }
   };
 
@@ -104,7 +104,7 @@ describe('AdRoll - v2', function() {
       });
 
       it('should send a mapped event', function() {
-        analytics.track('Completed Order', { revenue: 17.38 });
+        analytics.track('Order Completed', { revenue: 17.38 });
         analytics.called(window.__adroll.record_user, {
           adroll_segments: 'f21vVsxY',
           adroll_conversion_value: 17.38
@@ -113,7 +113,7 @@ describe('AdRoll - v2', function() {
       });
 
       it('should map currency', function() {
-        analytics.track('Completed Order', { revenue: 17.38, currency: 'CAD' });
+        analytics.track('Order Completed', { revenue: 17.38, currency: 'CAD' });
         analytics.called(window.__adroll.record_user, {
           adroll_segments: 'f21vVsxY',
           adroll_conversion_value: 17.38,
