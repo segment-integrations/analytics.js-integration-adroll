@@ -1,3 +1,9 @@
+
+2.1.0 / 2016-08-16
+==================
+
+  * Merge pull request #14 from segment-integrations/add/ecomm-v2
+  * updating deps and method names
 2.0.0 / 2016-06-21
 ==================
 
