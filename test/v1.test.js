@@ -26,11 +26,16 @@ describe('AdRoll - v1', function() {
     analytics.add(adroll);
   });
 
-  afterEach(function() {
-    analytics.restore();
-    analytics.reset();
-    adroll.reset();
-    sandbox();
+  afterEach(function(done) {
+    // Adroll adds its own scripts to the page. Wait for them to finish loading
+    // in case they reference globals that we are clearing after each test.
+    analytics.waitForScripts(function() {
+      analytics.restore();
+      analytics.reset();
+      adroll.reset();
+      sandbox();
+      done();
+    });
   });
 
   describe('after loading', function() {
