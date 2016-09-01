@@ -215,7 +215,7 @@ each(function(version) {
         });
 
         it('should map price and product id for Product Viewed', function() {
-          analytics.track('Product Viewed', { price: 17.38, id: 'beans' });
+          analytics.track('Product Viewed', { price: 17.38, product_id: 'beans' });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'viewed_product',
             adroll_conversion_value: 17.38,
@@ -225,7 +225,7 @@ each(function(version) {
         });
 
         it('should map price and product id for Product Added', function() {
-          analytics.track('Product Added', { price: 17.38, id: 'beans' });
+          analytics.track('Product Added', { price: 17.38, product_id: 'beans' });
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'added_product',
             adroll_conversion_value: 17.38,
