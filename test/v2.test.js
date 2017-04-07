@@ -122,8 +122,7 @@ describe('AdRoll - v2', function() {
         analytics.calledOnce(window.__adroll.record_user);
       });
 
-      // FIXME(Peripheral1994): Disabling to test flakiness.
-      xit('should not send an unmapped event', function() {
+      it('should not send an unmapped event', function() {
         analytics.track('Nonexistent', {});
         analytics.didNotCall(window.__adroll.record_user);
       });
