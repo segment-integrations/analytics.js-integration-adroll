@@ -116,19 +116,21 @@ each(function(version) {
 
       describe('#identify', function() {
         beforeEach(function() {
-          analytics.stub(window.__adroll, 'record_adroll_email');
+          analytics.stub(window.__adroll, 'identify');
         });
 
         it('should pass email', function() {
           analytics.identify('id', { email: 'test@email.com' });
-          analytics.equal('test@email.com', window.adroll_email);
-          analytics.called(window.__adroll.record_adroll_email, 'segment');
-          analytics.calledOnce(window.__adroll.record_adroll_email);
+          analytics.called(window.__adroll.identify, {
+            email: 'test@email.com',
+            userId: 'id'
+          }, 'segment');
+          analytics.calledOnce(window.__adroll.identify);
         });
 
         it('should not pass empty email', function() {
           analytics.identify('id', {});
-          analytics.assert(!window.adroll_email);
+          analytics.assert(!window.__adroll.identify.called);
         });
       });
 
