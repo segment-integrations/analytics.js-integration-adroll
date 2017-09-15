@@ -137,7 +137,13 @@ each(function(version) {
       describe('#track', function() {
         beforeEach(function() {
           analytics.stub(window.__adroll, 'record_user');
+          analytics.stub(window.__adroll, 'track');
         });
+
+        function assertAdrollCalled() {
+          analytics.calledOnce(window.__adroll.record_user);
+          analytics.calledOnce(window.__adroll.track);
+        }
 
         it('should include userId', function() {
           analytics.user().identify('id');
@@ -146,7 +152,7 @@ each(function(version) {
             adroll_segments: 'order_created',
             user_id: 'id'
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
 
         it('should include orderId', function() {
@@ -155,7 +161,7 @@ each(function(version) {
             adroll_segments: 'order_created',
             order_id: 1
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
 
         it('should map revenue for normal track events', function() {
@@ -164,7 +170,7 @@ each(function(version) {
             adroll_segments: 'ate_habanero_cheese',
             adroll_conversion_value: 17.38
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
 
         it('should not map revenue if no revenue is found', function() {
@@ -172,7 +178,7 @@ each(function(version) {
           analytics.called(window.__adroll.record_user, {
             adroll_segments: 'ate_habanero_cheese'
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
 
         it('should map revenue to conversion_value', function() {
@@ -181,7 +187,7 @@ each(function(version) {
             adroll_segments: 'order_created',
             adroll_conversion_value: 1.99
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
 
         it('should should send total if no revenue for conversion_value', function() {
@@ -191,7 +197,7 @@ each(function(version) {
             adroll_conversion_value: 29.88,
             total: 29.88
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
 
         it('should map revenue as conversion_value and total as custom prop', function() {
@@ -201,7 +207,7 @@ each(function(version) {
             adroll_conversion_value: 2.99,
             total: 17.38
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
 
         it('should include properties', function() {
@@ -213,7 +219,7 @@ each(function(version) {
             other: '1234',
             order_id: '12345'
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
 
         it('should map price and product id for Product Viewed', function() {
@@ -223,7 +229,7 @@ each(function(version) {
             adroll_conversion_value: 17.38,
             product_id: 'beans'
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
 
         it('should map price and product id for Product Added', function() {
@@ -233,7 +239,7 @@ each(function(version) {
             adroll_conversion_value: 17.38,
             product_id: 'beans'
           });
-          analytics.calledOnce(window.__adroll.record_user);
+          assertAdrollCalled();
         });
       });
     });
